@@ -6,3 +6,4 @@ __pycache__/
 **/.DS_Store
 day3/api_project/
 resources/.DS_Store
+**/fine_tune_demo_data/
