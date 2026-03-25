@@ -22,7 +22,7 @@ Then create a projects folder, move into it, and clone the repository:
 mkdir $HOME\projects -Force
 cd $HOME\projects
 username: aitrainingAT
-git clone <repository-url> ai-training
+git clone https://aceturtle.git.beanstalkapp.com/ai_training.git
 cd ai-training
 ```
 

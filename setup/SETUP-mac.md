@@ -24,7 +24,7 @@ Then clone the repository:
 mkdir -p ~/projects
 cd ~/projects
 username: aitrainingAT
-git clone <repository-url> ai-training
+git clone https://aceturtle.git.beanstalkapp.com/ai_training.git
 cd ai-training
 ```
 
