@@ -24,6 +24,7 @@ cd $HOME\projects
 username: aitrainingAT
 git clone https://aceturtle.git.beanstalkapp.com/ai_training.git
 cd ai-training
+git checkout submission
 ```
 
 If Windows blocks long file paths, run this once in an elevated PowerShell:

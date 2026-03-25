@@ -27,6 +27,7 @@ cd ~/projects
 username: aitrainingAT
 git clone https://aceturtle.git.beanstalkapp.com/ai_training.git
 cd ai-training
+git checkout submission 
 ```
 
 ## Step 2: Install `uv`
