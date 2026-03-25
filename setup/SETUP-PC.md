@@ -21,6 +21,7 @@ Then create a projects folder, move into it, and clone the repository:
 ```powershell
 mkdir $HOME\projects -Force
 cd $HOME\projects
+username: aitrainingAT
 git clone <repository-url> ai-training
 cd ai-training
 ```

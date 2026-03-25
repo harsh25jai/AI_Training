@@ -24,6 +24,7 @@ Then clone the repository:
 ```bash
 mkdir -p ~/projects
 cd ~/projects
+username: aitrainingAT
 git clone <repository-url> ai-training
 cd ai-training
 ```
