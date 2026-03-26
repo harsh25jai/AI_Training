@@ -129,3 +129,15 @@ uv sync --refresh
 
 Make sure the `Python` and `Jupyter` extensions are installed.
 
+## Step 3.5: Installing Docker
+
+Docker is the containerization tool used in some examples and the `day3` container demo.
+
+- Download Docker Desktop: https://www.docker.com/products/docker-desktop
+- Install and enable WSL2 backend if prompted.
+- Start Docker Desktop and verify:
+
+```powershell
+docker --version
+docker run hello-world
+```
