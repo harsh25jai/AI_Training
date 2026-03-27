@@ -7,3 +7,4 @@ __pycache__/
 **/api_project/**
 resources/.DS_Store
 **/fine_tune_demo_data/
+.vscode
