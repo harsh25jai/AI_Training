@@ -230,11 +230,13 @@ def generate_answer(query: str, docs: str, model: str = DEFAULT_CHAT_MODEL) -> s
         "NEVER return a user's mobile number while returning user information. "
         "ARITHMETIC: After identifying all invoice amounts for a customer, "
         "you MUST explicitly add them together and state the computed grand total. "
-        "Example: ₹17,999 + ₹17,999 = ₹35,998. Never restate one invoice amount as the total."
+        "Example: ₹17,999 + ₹17,999 = ₹35,998. Never restate one invoice amount as the total. "
+        "SCOPE: When asked for a grand total (e.g. 'total paid', 'total revenue', "
+        "'total amount'), sum ALL invoices from ALL customers — do NOT limit to one customer. "
+        "Only filter by customer if the question explicitly names a specific person."
     )
     user = f"Context:\n{docs}\n\nQuestion: {query}"
     return openai_chat(system, user, model=model)
-
 
 def verify_answer(answer: str, docs: str, model: str = DEFAULT_CHAT_MODEL) -> str:
     system = (
@@ -247,7 +249,10 @@ def verify_answer(answer: str, docs: str, model: str = DEFAULT_CHAT_MODEL) -> st
         "must be SUMMED across ALL invoices — not taken from just one invoice. "
         "3. ARITHMETIC CHECK: Recompute the grand total yourself by adding each invoice amount. "
         "If the answer states individual amounts but the grand total is wrong or missing, "
-        "correct it. Example: ₹17,999 + ₹17,999 = ₹35,998 — never repeat one amount as total."
+        "correct it. Example: ₹17,999 + ₹17,999 = ₹35,998 — never repeat one amount as total. "
+        "4. SCOPE CHECK: If the question asks for a global total (e.g. 'total paid', "
+        "'total revenue'), verify the answer includes ALL invoices from ALL customers, "
+        "not just one customer. If any invoices are missing, add them and recompute."
     )
     user = f"Context:\n{docs}\n\nInitial Answer:\n{answer}"
     return openai_chat(system, user, model=model)
