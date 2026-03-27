@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  app:
+    build: ./app
+    container_name: customer-voice-agent-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./app/.env
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: customer-voice-agent-ngrok
+    depends_on:
+      - app
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    command: ["http", "host.docker.internal:3000"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: customer-voice-agent-db
+    environment:
+      POSTGRES_DB: voice_agent
+      POSTGRES_USER: voice_agent_user
+      POSTGRES_PASSWORD: voice_agent_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
